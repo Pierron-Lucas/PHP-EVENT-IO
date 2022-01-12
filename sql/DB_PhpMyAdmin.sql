@@ -1,4 +1,5 @@
 -- Création de la table représentant les campagnes d’idéation d’événements --
+-- Cette table contient une campagne avec une date de début et une date de fin --
 CREATE TABLE `u697824263_eventIO`.`Campaign`
 (
     campaign_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -7,6 +8,7 @@ CREATE TABLE `u697824263_eventIO`.`Campaign`
 ) ENGINE = INNODB;
 
 -- Création de la table représentant les utilisateurs --
+-- Cette table contient un utilisateur avec un nom, un prénom, une adresse mail, et un mot de passe --
 CREATE TABLE `u697824263_eventIO`.`User`
 (
     user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -18,16 +20,23 @@ CREATE TABLE `u697824263_eventIO`.`User`
 
 
 -- Création de la table représentant les donateurs --
+-- Cette table contient un utilisateur et une campagne avec une réserve de points --
 -- Contrainte : si l'utilisateur n'existe pas on ne peut créer le donateur --
 -- Contrainte : Si l'utilisateur est supprimé alors le donateur aussi --
+-- Contrainte : si la campagne n'existe pas on ne peut créer le donateur --
+-- Contrainte : Si la campagne est supprimé alors le donateur aussi --
 CREATE TABLE `u697824263_eventIO`.`Donor`
 (
-    user_id INT NOT NULL PRIMARY KEY,
+    user_id INT NOT NULL,
+    campaign_id INT NOT NULL,
     donor_points INT DEFAULT NULL,
+    PRIMARY KEY (`user_id`, `campaign_id`),
     CONSTRAINT `FK_DONOR_USER` FOREIGN KEY (`user_id`) REFERENCES `User`(`user_id`) ON DELETE CASCADE ON UPDATE RESTRICT
+    CONSTRAINT `FK_DONOR_CAMPAIGN` FOREIGN KEY (`campaign_id`) REFERENCES `Campaign`(`campaign_id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = INNODB;
 
 -- Création de la table représentant les jury --
+-- Cette table contient un utilisateur et une campagne --
 -- Contrainte : si l'utilisateur n'existe pas on ne peut créer le jury --
 -- Contrainte : Si l'utilisateur est supprimé alors le jury aussi --
 -- Contrainte : si la campagne n'existe pas on ne peut créer le jury --
@@ -42,6 +51,7 @@ CREATE TABLE `u697824263_eventIO`.`Jury`
 ) ENGINE = INNODB;
 
 -- Création de la table représentant les idées d’événements --
+-- Cette table contient un event et une campagne avec une description, une réserve de points, si l'event a été retenu, et le tier --
 -- Contrainte : si la campagne n'existe pas on ne peut créer l'event --
 -- Contrainte : Si la campagne est supprimé alors l'event aussi --
 CREATE TABLE `u697824263_eventIO`.`Event`
@@ -67,6 +77,7 @@ BEGIN
 END$$
 
 -- Création de la table représentant les contenus déblocables supplémentaires --
+-- Cette table contient un tier et un event avec une description et le nombre de points pour le débloqué --
 -- Contrainte : Si l'event n'existe pas on ne peut créer le tier --
 -- Contrainte : Si l'event est supprimé alors le tier aussi --
 CREATE TABLE `u697824263_eventIO`.`Tier`
@@ -74,6 +85,7 @@ CREATE TABLE `u697824263_eventIO`.`Tier`
     tier_number INT NOT NULL,
     event_id INT NOT NULL,
     tier_description VARCHAR(250)  NOT NULL,
+    tier_unlock INT NOT NULL,
     PRIMARY KEY (`tier_number`, `event_id`),
     CONSTRAINT `FK_TIER_EVENT` FOREIGN KEY (`event_id`) REFERENCES `Event`(`event_id`) ON DELETE CASCADE ON UPDATE RESTRICT
 ) ENGINE = INNODB;
@@ -93,6 +105,7 @@ BEGIN
 END$$
 
 -- Création de la table représentant les organisateurs --
+-- Cette table contient un utilisateur et une campagne avec un event --
 -- Contrainte : si l'utilisateur n'existe pas on ne peut créer l'organisateur --
 -- Contrainte : Si l'utilisateur est supprimé alors l'organisateur aussi --
 -- Contrainte : si la campagne n'existe pas on ne peut créer l'organisateur --
