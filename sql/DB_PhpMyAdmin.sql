@@ -15,7 +15,7 @@ CREATE TABLE `u697824263_eventIO`.`User`
     user_name VARCHAR(50) NOT NULL,
     user_firstname VARCHAR(50)  NOT NULL,
     user_mail VARCHAR(50)  NOT NULL,
-    user_password VARCHAR(50)  NOT NULL
+    user_password VARCHAR(512) CHARACTER SET utf8 COLLATE utf8_bin  NOT NULL
 ) ENGINE = INNODB;
 
 
