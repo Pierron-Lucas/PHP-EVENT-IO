@@ -1,21 +1,24 @@
 -- Création de la table représentant les campagnes d’idéation d’événements --
--- Cette table contient une campagne avec une date de début et une date de fin --
+-- Cette table contient une campagne avec une date de début, une date de fin et une description --
 CREATE TABLE `u697824263_eventIO`.`Campaign`
 (
     campaign_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     campaign_begin DATE NOT NULL,
-    campaign_end DATE NOT NULL
+    campaign_end DATE NOT NULL,
+    campaign_description VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_bin  NOT NULL
 ) ENGINE = INNODB;
 
 -- Création de la table représentant les utilisateurs --
--- Cette table contient un utilisateur avec un nom, un prénom, une adresse mail, et un mot de passe --
+-- Cette table contient un utilisateur avec un nom, un prénom, une adresse mail, un mot de passe, et son droit --
 CREATE TABLE `u697824263_eventIO`.`User`
 (
     user_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     user_name VARCHAR(50) NOT NULL,
     user_firstname VARCHAR(50)  NOT NULL,
+    user_username VARCHAR(50)  NOT NULL,
     user_mail VARCHAR(50)  NOT NULL,
-    user_password VARCHAR(512) CHARACTER SET utf8 COLLATE utf8_bin  NOT NULL
+    user_password VARCHAR(512) CHARACTER SET utf8 COLLATE utf8_bin  NOT NULL,
+    user_right INT NOT NULL DEFAULT 0
 ) ENGINE = INNODB;
 
 
@@ -58,7 +61,7 @@ CREATE TABLE `u697824263_eventIO`.`Event`
 (
     event_id INT NOT NULL,
     campaign_id INT NOT NULL,
-    event_description VARCHAR(500)  NOT NULL,
+    event_description VARCHAR(500) CHARACTER SET utf8 COLLATE utf8_bin  NOT NULL,
     event_points INT NOT NULL DEFAULT 0,
     event_retained BOOLEAN NOT NULL DEFAULT FALSE,
     tier_number INT NOT NULL DEFAULT 0,
@@ -84,7 +87,7 @@ CREATE TABLE `u697824263_eventIO`.`Tier`
 (
     tier_number INT NOT NULL,
     event_id INT NOT NULL,
-    tier_description VARCHAR(250)  NOT NULL,
+    tier_description VARCHAR(250) CHARACTER SET utf8 COLLATE utf8_bin  NOT NULL,
     tier_unlock INT NOT NULL,
     PRIMARY KEY (`tier_number`, `event_id`),
     CONSTRAINT `FK_TIER_EVENT` FOREIGN KEY (`event_id`) REFERENCES `Event`(`event_id`) ON DELETE CASCADE ON UPDATE RESTRICT

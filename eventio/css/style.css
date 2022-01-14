@@ -115,14 +115,12 @@ body{
 
 .blockform{
     top: 20%;
-    left: 15%;
+    left: 30%;
     background-color: rgba(255, 255, 255, 1);
-    display: flex;
-    width: 65%;
+    width: 35%;
     margin: 5% auto;
     padding: 50px;
     border-radius: 10px;
-    justify-content: space-between;
     text-align: center;
 }
 
@@ -151,10 +149,6 @@ form p{
     font-family: Trebuchet MS, sans-serif;
 }
 
-.inscription{
-    width: 35%;
-}
-
 .align-form{
     text-align: left;
 }
@@ -173,10 +167,6 @@ form p{
 .chk label{
     width: 100%;
     background-color: red;
-}
-
-.connexion{
-    width: 35%;
 }
 
 .sub{
@@ -202,6 +192,105 @@ form p{
     border: 2px solid #dcdde1;
     border-radius: 10px;
 }
+
+/* PAGE EVENT */
+.post-event {
+    position: relative;
+    display: inline-block;
+    height: 800px;
+    width: 100%;
+    background-image: url('../image/event/Eventimg.png');
+    background-size: cover;
+  }
+  
+.post-event-block p{
+    font-size: 80px;
+    color: white;
+    position: absolute; 
+    top: 50%; 
+    left: 0; 
+    right: 0; 
+    transform: translate(0, -50%); 
+    text-align: center; 
+    text-shadow: 0 0 15px;
+    }
+
+.event{
+    background-color: rgb(219, 219, 219);
+    width: 100%;
+    padding: 40px;
+}
+
+.event-body{
+    background-color: #fff;
+    border-radius: 20px;
+    width: 45%;
+    margin: 10px;
+    overflow: hidden;
+}
+
+.event-block{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+}
+
+.event-block-section1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.event-block-section1 img{
+    width: 350px;
+    height: 200px;
+}
+
+.event-block-section1 h3{
+    margin-top: 20px;
+}
+
+.event-block-section2{
+    display: flex;
+    flex-direction: column;
+}
+
+.description{
+    width: 80%;
+    margin: auto;
+}
+
+.event-block-section2 b{
+    text-align: center;
+}
+
+.event-block-section2 a{
+    margin: 40px auto;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #183153;
+    width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.event-block-section2 a:hover{
+    transition: .3s;
+    background-color: #11223a;
+}
+
+.event-block-section2 i{
+    margin-left: 10px;
+}
+
+.block-right{
+    margin: -10% 0 0 50%;
+}
+
 
 
 
