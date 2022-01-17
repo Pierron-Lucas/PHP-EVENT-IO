@@ -8,9 +8,16 @@
             $req = $pdoHelper->GetPDO()->prepare("SELECT MAX(palier_number) FROM Palier WHERE ideesCampaign_id = :ideesCampaign_id");
             $req -> execute(array(":ideesCampaign_id"=>$ideesCampaign_id));
             $palier_number = $req -> fetch();
+            // Determine le numero de palier
             if ($palier_number == NULL) $palier_number = 1;
-            else $palier_number += 1;
-
+            else {
+                // Regarde que le nouveau palier n'ait pas un nombre de points inferieur au palier précédent
+                $req2 = $pdoHelper->GetPDO()->prepare("SELECT palier_points FROM Palier WHERE ideesCampaign_id = :ideesCampaign_id AND palier_number = :palier_number");
+                $req2 -> execute(array(":ideesCampaign_id"=>$ideesCampaign_id, ":palier_number"=>$palier_number));
+                $palier_pointsMin = $req2 -> fetch();
+                if ($palier_points <= $palier_pointsMin) return;
+                $palier_number += 1;
+            }
             $sql = "INSERT INTO Palier (ideesCampaign_id, palier_number, palier_description, palier_points, palier_unlock)
                         VALUES (:ideesCampaign_id, :palier_number, :palier_desc, :palier_points,'')";
             $res = $pdoHelper->GetPDO()->prepare($sql);
@@ -33,10 +40,20 @@
                 $res1->execute(array(":ideesCampaign_id"=>$ideesCampaign_id, ":palier_number"=>$palier_number));
                 $palier_desc = $res1 -> fetch();
             }
+
             if ($palier_points == NULL) {
                 $res2 = $pdoHelper->GetPDO()->prepare("SELECT palier_points FROM Palier WHERE ideesCampaign_id = :ideesCampaign_id AND palier_number = :palier_number ");
                 $res2->execute(array(":ideesCampaign_id"=>$ideesCampaign_id, ":palier_number"=>$palier_number));
                 $palier_desc = $res2 -> fetch();
+            }
+            // Regarde que le palier modifié n'ait pas un nombre de points inferieur au palier précédent
+            else {
+                if($palier_number > 1) {
+                    $req2bis = $pdoHelper->GetPDO()->prepare("SELECT palier_points FROM Palier WHERE ideesCampaign_id = :ideesCampaign_id AND palier_number = :palier_number");
+                    $req2bis ->execute(array(":ideesCampaign_id"=>$ideesCampaign_id, ":palier_number"=>$palier_number));
+                    $palier_pointsMin = $req2bis -> fetch();
+                    if ($palier_points <= $palier_pointsMin) return;
+                }
             }
 
             if ($palier_unlock == NULL) {
