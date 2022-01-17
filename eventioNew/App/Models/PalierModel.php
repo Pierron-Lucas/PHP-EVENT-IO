@@ -6,10 +6,11 @@
 
             $req = $pdoHelper->GetPDO()->prepare("SELECT MAX(palier_number) FROM Palier WHERE ideesCampaign_id = :ideesCampaign_id");
             $req -> execute(array(":ideesCampaign_id"=>$ideesCampaign_id));
-            $palier_numbermax = $req -> fetch();
-            if ($palier_numbermax == NULL) return;
+            $palier_numberMax = $req -> fetch();
+            if ($palier_numberMax == NULL) return;
+            // Boucle qui vérifie les palier d'une idée
             else {
-                for ($palier_number = 1; $palier_number <= $palier_numbermax; $palier_number += 1) {
+                for ($palier_number = 1; $palier_number <= $palier_numberMax; $palier_number += 1) {
                     $sql = $pdoHelper->GetPDO()->prepare("SELECT palier_points FROM Palier WHERE ideesCampaign_id = :ideesCampaign_id AND palier_number = :palier_number");
                     $sql -> execute(array(":ideesCampaign_id"=>$ideesCampaign_id, ":palier_number"=>$palier_number));
                     $palier_points = $sql -> fetch();
