@@ -1,7 +1,7 @@
 <div class="blockform abs">
     <div class="inscription">
         <h1>S'inscrire</h1>
-        <form action="<?= SITE_URL ?>?controller=index&action=inscription" method="post">
+        <form action="<?= SITE_URL ?>?controller=index&action=inscription" method="POST">
             <div class="align-form">
                 <p>Prénom</p>
                 <input type="text" name="surname" required>
@@ -16,10 +16,7 @@
             <br> <br>
             <input class="sub" type="submit" value="Je m'inscris">
             <br><br>
-            <a href="<?= SITE_URL ?>?controller=index&action=connexion">J'ai deja un compte</a>
+            <a href="<?= SITE_URL ?>?controller=index&action=connexion">J'ai déjà un compte</a>
         </form>
     </div>
 </div>
-<div id="particles-js"></div>
-<script src="../js/particles.js"></script>
-<script src="../js/app.js"></script>

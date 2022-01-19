@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,12 +20,24 @@
             </div>
             <div class="nav-link">
                 <a href="<?= SITE_URL ?>?controller=index&action=evenement">Evenements</a>
-                <?php if( !SessionHelper::GetUser() ) { ?>
+                <?php if( SessionHelper::GetUser() != null && SessionHelper::GetRole() == "Administrateur") { ?>
+                    <div class="no-responsive">
+                        <a href="<?= SITE_URL ?>?controller=index&action=administration">Administration</a>
+                    </div>
+                   
+                <?php } ?>
+                <?php if( SessionHelper::GetUser() == null ) { ?>
                     <a href="<?= SITE_URL ?>?controller=index&action=connexion">Connexion</a>
+                <?php } ?>
+                <?php if( SessionHelper::GetUser() != null ) { ?>
+                    <a href="<?= SITE_URL ?>?controller=index&action=deconnexion">Deconnexion</a>
                 <?php } ?>
             </div>
         </div>
     </header>
     <?php echo $this->content ?>
+    <div id="particles-js"></div>
+    <script src="../js/particles.js"></script>
+    <script src="../js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,9 @@
+Pour eviter tout prolème de plagiat : 
+
+le js (fond animé) à été créé grace au site : particles.js qui permet d'exporter une configuration json pour l'utiliser
+sur un site web
+
+L'animation du texte est un code pris sur internet dont je n'ai plus la source car c'est un code que j'avais
+trouvé il y a un moment mais que je n'ai pas retenu l'auteur.
+
+Merci --

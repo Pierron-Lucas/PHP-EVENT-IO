@@ -1,6 +1,7 @@
 <?php
 
 // Utils/PdoDatabaseHelper.php
+//Connexion à notre base de données
 
 class PdoHelper{
 

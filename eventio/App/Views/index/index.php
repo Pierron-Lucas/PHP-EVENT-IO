@@ -1,23 +1,17 @@
 <div class="index abs">
-        <div class="index-pres">
-            <div id="text-pres"></div>
-            <p>
-                E-Event.IO est une campagne d'idéation d'évènements, où des étudiants organisateurs proposent
-                des idées d'évènements. Une seule et unique idée d'évènement peut être proposée par organisateur 
-                pendant cette période définie.
-            </p>
-            <a href="connexion.html">Voir les évènements</a>
-        </div>
-        <a href="#"><i class="fas fa-chevron-down"></i></a>
+    <div class="index-pres">
+        <div id="text-pres"></div>
+        <p>
+            E-Event.IO est une campagne d'idéation d'évènements, où des étudiants organisateurs proposent
+            des idées d'évènements. Une seule et unique idée d'évènement peut être proposée par organisateur 
+            pendant cette période définie.
+        </p>
+        <a href="<?= SITE_URL ?>?controller=index&action=evenement">Voir les évènements</a>
     </div>
-    <div id="particles-js"></div>
-    
-    <!-- scripts -->
-<script src="../js/particles.js"></script>
-<script src="../js/app.js"></script>
+</div>
 
 <script>
-    var chaine = "Notre mission :                      réaliser ton évènement."
+    var chaine = "Notre mission :                      réaliser ton évènement.";
     var nb_car = chaine.length; 
     var tableau = chaine.split("");
     texte = new Array;
